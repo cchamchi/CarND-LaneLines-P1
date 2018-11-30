@@ -28,27 +28,25 @@ gray scale image, I converted target image to gray and modified it less sensitiv
 
 I tried 3/5/7 size of kernel, size 5 was best. 
 
-The second is pick the
+The second is detect edges using canny algorithm. Because it found so many edges I have to pick the region of interest
 
-I converted the images to grayscale, then I .... 
+The third is to figure out clean line from edges applying hough transform to detected edges.
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+In order to draw a single line on the left and right lanes, I modified the draw_lines() function by separating egdes with left and right group. From group of edges, I calculated a line y=Ax+b, A is slope and b is intersection. The library stats.linregress calculated slope/intersrctions. To draw lines in region of interest I calculated bottom point across the x axis 
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
+And last I draw the lines on the image
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
 
-One potential shortcoming would be what would happen when ... 
+One potential shortcoming would be what would happen when lane is a curve. Becasue I assumed 1st-order line and across x-axis If the lane is curve the expectect line could be across y-axis 
 
-Another shortcoming could be ...
+Another shortcoming could be shadow. The canny could miss-understand shadow as line. and could be yellow line.
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
+A possible improvement would be to find curved lane
 
-Another potential improvement could be to ...
+Another potential improvement could be to detect shadow and yellow lane
